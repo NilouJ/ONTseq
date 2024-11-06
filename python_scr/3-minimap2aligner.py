@@ -2,15 +2,17 @@ import os
 import subprocess
 
 # Define paths for reference, query directory, and output
-ref_fasta_path = "/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/result_flye/5k/barcode03/assembly.fasta"
-query_fastq_dir = "/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/ONTseq_Data/basecalling/pass/barcode03"
+ref_fasta_path = ("/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/result_flye/5k"
+                  "/barcode03/assembly.fasta")
+query_fastq_dir = ("/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/ONTseq_Data"
+                   "/basecalling/pass/barcode03")
 output_base = "/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/result_seqaligner"
 
 # Ensure output directory exists
 os.makedirs(output_base, exist_ok=True)
 
 # Define output filenames based on the reference file
-output_name = os.path.splitext(os.path.basename(ref_fasta_path))[0]
+output_name = os.path.splitext(os.path.basename(query_fastq_dir))[0]
 sam_output_path = os.path.join(output_base, f"{output_name}.sam")
 bam_output_path = os.path.join(output_base, f"{output_name}.bam")
 
