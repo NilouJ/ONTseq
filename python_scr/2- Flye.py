@@ -3,7 +3,7 @@ import os
 import glob
 
 
-def run_flye(fastq_dir, output_dir, genome_size, threads=6):
+def run_flye(fastq_dir, output_dir, genome_size, threads=6, use_meta=False):
     if not os.path.isdir(fastq_dir):
         print(f"Error: The specified fastq directory '{fastq_dir}' does not exist.")
         return
@@ -26,6 +26,12 @@ def run_flye(fastq_dir, output_dir, genome_size, threads=6):
                    "--threads", str(threads)
                ]
 
+    if use_meta:
+        flye_cmd.append("--meta")
+
+    # Print the constructed command for comparison
+    print("Generated command:", " ".join(flye_cmd))
+
     try:
         subprocess.run(flye_cmd, check=True)
         print("Flye assembly completed successfully.")
@@ -35,10 +41,11 @@ def run_flye(fastq_dir, output_dir, genome_size, threads=6):
         print("Error: Flye is not installed or not found in PATH.")
 
 
+# Example usage
 fastq_directory = ("/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/ONTseq_Data"
                    "/basecalling/pass/barcode03")
 output_directory = ("/Users/MQ10005295/Library/CloudStorage/OneDrive-MacquarieUniversity/Nilou/Nanopore/result_flye/6k"
                     "/barcode03")
-genome_size = "6k"
+genome_size = "6221"
 
-run_flye(fastq_directory, output_directory, genome_size)
+run_flye(fastq_directory, output_directory, genome_size, threads=6, use_meta=True)
